@@ -16,7 +16,7 @@ const NodeBird = ({ Component }) => {
     )
 }
 
-NodeBird.prototype = {
+NodeBird.propTypes = {
     Component: PropTypes.elementType.isRequired,
 }
 
