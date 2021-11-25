@@ -10,9 +10,7 @@ export const initialState = {
             src: 'https://cdn.mhns.co.kr/news/photo/202104/505253_608814_626.jpg',
         }, {
             src: 'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E',
-        }, {
-            src: 'https://t1.daumcdn.net/cfile/blog/2455914A56ADB1E315',
-        }],
+        }, ],
         Comments: [{
             User: {
                 nickname: 'nero',
