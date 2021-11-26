@@ -10,6 +10,8 @@ export const initialState = {
             src: 'https://cdn.mhns.co.kr/news/photo/202104/505253_608814_626.jpg',
         }, {
             src: 'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E',
+        }, {
+            src: 'https://img1.daumcdn.net/thumb/C300x430/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2Ff2d3ee4afbc78b44e34534037e17f7f382e1b65c',
         }, ],
         Comments: [{
             User: {
