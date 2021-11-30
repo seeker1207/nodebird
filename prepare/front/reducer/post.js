@@ -5,7 +5,7 @@ export const initialState = {
             id:1,
             nickname: '찌훈손',
         },
-        content: '첫 번쨰 게시글 #해시태그',
+        content: '첫 번쨰 게시글 #해시태그#익스프레스',
         Images: [{
             src: 'https://cdn.mhns.co.kr/news/photo/202104/505253_608814_626.jpg',
         }, {
