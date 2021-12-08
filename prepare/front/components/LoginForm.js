@@ -1,11 +1,11 @@
-import React, {useState, useCallback, useMemo} from 'react';
+import React, { useCallback } from 'react';
 import {Form, Input, Button} from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import useInput from "../hooks/useinput";
-import {useDispatch} from "react-redux";
-import {loginAction} from "../reducer/user";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequestAction } from "../reducer/user";
 
 const ButtonWrapper = styled.div`
     color: red;
@@ -19,10 +19,11 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const [id, onChangeId] = useInput('');
     const [password, onChangePassword] = useInput('');
+    const { isLoggingIn } = useSelector((state) => state.user);
 
     const onSubmitForm = useCallback(() => {
        console.log(id, password);
-        dispatch(loginAction({ id, password }));
+        dispatch(loginRequestAction({ id, password }));
     }, [id, password]);
 
     return (
@@ -44,7 +45,7 @@ const LoginForm = () => {
                 />
             </div>
             <ButtonWrapper>
-                <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
+                <Button type="primary" htmlType="submit" loading={isLoggingIn}>로그인</Button>
                 <Link href="/signup"><a><Button>회원가입</Button></a></Link>
             </ButtonWrapper>
         </FormWrapper>
