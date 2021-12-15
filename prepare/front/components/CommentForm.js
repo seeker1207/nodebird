@@ -7,7 +7,7 @@ import { ADD_COMMENT_REQUEST } from '../reducer/post';
 
 const CommentForm = function ({ post }) {
   const id = useSelector((state) => state.user.me?.id);
-  const { addCommentDone } = useSelector((state) => state.post);
+  const { addCommentDone, addCommentLoading } = useSelector((state) => state.post);
 
   const [commentText, onChangeCommentText, setCommentText] = useinput('');
 
@@ -28,9 +28,9 @@ const CommentForm = function ({ post }) {
 
   return (
     <Form onFinish={onSubmitComment}>
-      <Form.Item>
+      <Form.Item style={{ position: 'relative', margin: 0 }}>
         <Input.TextArea value={commentText} onChange={onChangeCommentText} rows={4} />
-        <Button type="primary" htmlType="submit">삐약</Button>
+        <Button type="primary" htmlType="submit" style={{ position: 'absolute', right: 0, bottom: -40, zIndex: 1 }} loading={addCommentLoading}>삐약</Button>
       </Form.Item>
     </Form>
   );

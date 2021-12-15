@@ -53,7 +53,7 @@ const dummyUser = (data) => ({
   nickname: '제로초',
   id: 1,
   Posts: [],
-  Followings: [],
+  Followings: [{ nickname: '부기초' }],
   Followers: [],
 });
 

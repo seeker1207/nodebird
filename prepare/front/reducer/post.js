@@ -39,9 +39,9 @@ export const initialState = {
   addPostDone: false,
   addPostError: null,
 
-  addCommentsLoading: false,
-  addCommentsDone: false,
-  addCommentsError: null,
+  addCommentLoading: false,
+  addCommentDone: false,
+  addCommentError: null,
 };
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -65,6 +65,7 @@ export const addComment = (data) => ({
 const dummyPost = (data) => ({
   id: shortId.generate(),
   User: {
+    id: 1,
     nickname: '제로손',
   },
   content: data,
@@ -103,7 +104,7 @@ const reducer = (state = initialState, action) => {
     case ADD_COMMENT_REQUEST:
       return {
         ...state,
-        addCommentsLoading: true,
+        addCommentLoading: true,
       };
 
     case ADD_COMMENT_SUCCESS: {
@@ -115,14 +116,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         mainPosts,
-        addCommentsLoading: false,
-        addCommentsDone: true,
+        addCommentLoading: false,
+        addCommentDone: true,
       };
     }
     case ADD_COMMENT_FAILURE:
       return {
-        addCommentsLoading: false,
-        addCommentsError: action.error,
+        addCommentLoading: false,
+        addCommentError: action.error,
       };
     default:
       return state;
