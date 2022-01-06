@@ -7,6 +7,7 @@ import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import { REMOVE_POST_REQUEST } from '../reducer/post';
+import FollowButton from './FollowButton';
 
 const PostCard = function ({ post }) {
   const dispatch = useDispatch();
