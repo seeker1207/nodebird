@@ -106,7 +106,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.hasMorePosts = draft.mainPosts.length < 50;
       break;
     case LOAD_POST_FAILURE:
-      draft.addPostLoading = true;
+      draft.addPostLoading = false;
       draft.addPostError = action.error;
       break;
     case ADD_POST_REQUEST:
@@ -120,7 +120,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.mainPosts.unshift(dummyPost(action.data));
       break;
     case ADD_POST_FAILURE:
-      draft.addPostLoading = true;
+      draft.addPostLoading = false;
       draft.addPostError = action.error;
       break;
     case REMOVE_POST_REQUEST:
