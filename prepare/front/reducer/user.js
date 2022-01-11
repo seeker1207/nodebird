@@ -13,6 +13,10 @@ export const initialState = {
   FollowDone: false,
   FollowError: null,
 
+  unFollowLoading: false,
+  unFollowDone: false,
+  unFollowError: null,
+
   SignUpLoading: false,
   SignUpDone: false,
   SignUpError: null,
@@ -76,6 +80,36 @@ export const logoutRequestAction = () => ({
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
+    case FOLLOW_REQUEST:
+      draft.followLoading = true;
+      draft.followError = null;
+      draft.followDone = false;
+      break;
+    case FOLLOW_SUCCESS:
+      console.log(action.data);
+      draft.followLoading = false;
+      draft.me.Followings.push({ id: action.data });
+      draft.followDone = true;
+      break;
+    case FOLLOW_FAILURE:
+      draft.followLoading = false;
+      draft.followError = action.error;
+      break;
+    case UNFOLLOW_REQUEST:
+      draft.unFollowLoading = true;
+      draft.unFollowError = null;
+      draft.unFollowDone = false;
+      break;
+    case UNFOLLOW_SUCCESS:
+      console.log(action.data);
+      draft.unFollowLoading = false;
+      draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data);
+      draft.unFollowDone = true;
+      break;
+    case UNFOLLOW_FAILURE:
+      draft.unFollowLoading = false;
+      draft.unFollowError = action.error;
+      break;
     case LOG_IN_REQUEST:
       draft.loginLoading = true;
       draft.loginError = null;
