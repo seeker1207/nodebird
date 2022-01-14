@@ -17,9 +17,9 @@ export const initialState = {
   unFollowDone: false,
   unFollowError: null,
 
-  SignUpLoading: false,
-  SignUpDone: false,
-  SignUpError: null,
+  signUpLoading: false,
+  signUpDone: false,
+  signUpError: null,
 
   changeNicknameLoading: false,
   changeNicknameDone: false,
@@ -117,7 +117,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case LOG_IN_SUCCESS:
       draft.loginLoading = false;
-      draft.me = dummyUser(action.data);
+      draft.me = action.data;
       draft.loginDone = true;
       break;
     case LOG_IN_FAILURE:
@@ -139,13 +139,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.loginError = action.error;
       break;
     case SIGN_UP_REQUEST:
-      draft.singUpLoading = true;
-      draft.singUpError = null;
-      draft.singUpDone = false;
+      draft.signUpLoading = true;
+      draft.signUpError = null;
+      draft.signUpDone = false;
       break;
     case SIGN_UP_SUCCESS:
-      draft.singUpLoading = false;
-      draft.singUpDone = true;
+      draft.signUpLoading = false;
+      draft.signUpDone = true;
       break;
     case SIGN_UP_FAILURE:
       draft.signUpLoading = false;
