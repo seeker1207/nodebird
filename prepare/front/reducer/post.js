@@ -70,15 +70,6 @@ export const addComment = (data) => ({
   data,
 });
 
-const dummyComment = (data) => ({
-  id: shortId.generate(),
-  User: {
-    id: 1,
-    nickname: '제로손',
-  },
-  content: data,
-});
-
 // 이전 상태를 액션을 통해 다음상태로 만들어 내는 함수 (불변성은 지키면서)
 // eslint-disable-next-line consistent-return
 const reducer = (state = initialState, action) => produce(state, (draft) => {
@@ -132,8 +123,8 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addCommentError = null;
       break;
     case ADD_COMMENT_SUCCESS: {
-      const post = draft.main.Posts.find((v) => v.id === action.data.postId);
-      post.Comments.unshift(dummyComment(action.data.content));
+      const post = draft.main.Posts.find((v) => v.id === action.data.PostId);
+      post.Comments.unshift(action.data);
       draft.addCommentLoading = false;
       draft.addCommentDone = true;
       break;
