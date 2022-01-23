@@ -1,6 +1,9 @@
 import { all, delay, fork, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import {
+  LOAD_MY_INFO_FAILURE,
+  LOAD_MY_INFO_SUCCESS,
+  LOAD_MY_INFO_REQUEST,
   LOG_IN_FAILURE,
   LOG_IN_SUCCESS,
   LOG_IN_REQUEST,
@@ -16,6 +19,26 @@ import {
   UNFOLLOW_SUCCESS,
   UNFOLLOW_FAILURE, FOLLOW_SUCCESS,
 } from '../reducer/user';
+
+function lodeMyInfoAPI() {
+  return axios.get('/user');
+}
+
+function* loadMyInfo() {
+  try {
+    const result = yield call(lodeMyInfoAPI);
+
+    yield put({
+      type: LOAD_MY_INFO_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_MY_INFO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
 
 function logInAPI(data) {
   return axios.post('/user/login', data);
@@ -117,6 +140,10 @@ function* unFollow(action) {
   }
 }
 
+function* watchLoadMyInfo() {
+  yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -144,6 +171,6 @@ export default function* userSaga() {
     fork(watchSignUp),
     fork(watchFollow),
     fork(watchUnFollow),
-
+    fork(watchLoadMyInfo),
   ]);
 }
