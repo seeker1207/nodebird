@@ -21,12 +21,6 @@ const Home = function () {
   }, []);
 
   useEffect(() => {
-    dispatch({
-      type: LOAD_POST_REQUEST,
-    });
-  }, []);
-
-  useEffect(() => {
     function onScroll() {
       console.log(window.scrollY, document.documentElement.clientHeight, document.documentElement.scrollHeight);
       console.log(addPostLoading);
