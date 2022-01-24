@@ -2,9 +2,9 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
-
 const { User, Post } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -66,8 +66,8 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         }, {
           model: User,
           as: 'Followers',
-        }]
-      })
+        }],
+      });
       return res.status(200).json(fullUserWithoutPassword);
     });
   })(req, res, next);
@@ -78,7 +78,7 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
     const exUser = await User.findOne({
       where: {
         email: req.body.email,
-      }
+      },
     });
     if (exUser) {
       return res.status(403).send('이미 사용중인 아이디 입니다.');
@@ -100,6 +100,6 @@ router.post('/logout', isLoggedIn, (req, res) => {
   req.logout();
   req.session.destroy();
   res.send('ok');
-})
+});
 
 module.exports = router;
