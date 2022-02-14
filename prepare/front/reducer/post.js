@@ -34,6 +34,10 @@ export const initialState = {
   uploadImagesLoading: false,
   uploadImagesDone: false,
   uploadImagesError: null,
+
+  retweetLoading: false,
+  retweetDone: false,
+  retweetError: null,
 };
 
 export const generateDummyPost = (number) => Array(number).fill().map(() => ({
@@ -83,6 +87,10 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
+export const RETWEET_REQUEST = 'RETWEET_REQUEST';
+export const RETWEET_SUCCESS = 'RETWEET_SUCCESS';
+export const RETWEET_FAILURE = 'RETWEET_FAILURE';
+
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 export const addPost = (data) => ({
@@ -99,6 +107,21 @@ export const addComment = (data) => ({
 // eslint-disable-next-line consistent-return
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
+    case RETWEET_REQUEST:
+      draft.retweetLoading = true;
+      draft.retweetDone = false;
+      draft.retweetError = null;
+      break;
+    case RETWEET_SUCCESS: {
+      // draft.imagePaths = action.data;
+      draft.retweetLoading = false;
+      draft.retweetDone = true;
+      break;
+    }
+    case RETWEET_FAILURE:
+      draft.retweetLoading = false;
+      draft.retweetError = action.error;
+      break;
     case REMOVE_IMAGE:
       draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
       break;
