@@ -28,12 +28,12 @@ const Home = function () {
 
   useEffect(() => {
     function onScroll() {
-      console.log(window.scrollY, document.documentElement.clientHeight, document.documentElement.scrollHeight);
-      console.log(addPostLoading);
       if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
         if (hasMorePosts && !addPostLoading) {
+          const lastId = mainPosts[mainPosts.length - 1]?.id;
           dispatch({
             type: LOAD_POST_REQUEST,
+            lastId,
           });
         }
       }
