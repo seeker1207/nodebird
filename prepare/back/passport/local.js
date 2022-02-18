@@ -10,7 +10,7 @@ module.exports = () => {
   }, async (email, password, done) => {
     try {
       const user = await User.findOne({
-        where: { email }
+        where: { email },
       });
       if (!user) {
         return done(null, false, { reason: '존재하지 않는 사용자입니다!' }); // done (서버에러, 성공하면 유저 정보, 클라이언트 에러 메세지)
@@ -25,6 +25,5 @@ module.exports = () => {
       console.error(error);
       return done(error);
     }
-
   }));
-}
+};
