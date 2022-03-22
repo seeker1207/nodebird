@@ -7,7 +7,7 @@ import post from './post';
 const rootReducer = (state, action) => {
   switch (action.type) {
     case HYDRATE:
-      console.log('HIDRATE', action);
+      console.log('HIDRATE!!!', action);
       return action.payload;
     default: {
       const combinedReducer = combineReducers({
