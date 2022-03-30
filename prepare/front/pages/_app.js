@@ -11,6 +11,7 @@ const NodeBird = function ({ Component }) {
       <Head>
         <meta charSet="UTF-8" />
         <title>NodeBird</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Component />
     </>
