@@ -27,6 +27,7 @@ export const initialState = {
   likePostLoading: false,
   likePostDone: false,
   likePostError: null,
+
   unlikePostLoading: false,
   unlikePostDone: false,
   unlikePostError: null,
@@ -70,6 +71,14 @@ export const UNLIKE_POST_FAILURE = 'UNLIKE_POST_FAILURE';
 export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
 export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
 export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE';
+
+export const LOAD_USER_POST_REQUEST = 'LOAD_USER_POST_REQUEST';
+export const LOAD_USER_POST_SUCCESS = 'LOAD_USER_POST_SUCCESS';
+export const LOAD_USER_POST_FAILURE = 'LOAD_USER_POST_FAILURE';
+
+export const LOAD_HASHTAG_POST_REQUEST = 'LOAD_HASHTAG_POST_REQUEST';
+export const LOAD_HASHTAG_POST_SUCCESS = 'LOAD_HASHTAG_POST_SUCCESS';
+export const LOAD_HASHTAG_POST_FAILURE = 'LOAD_HASHTAG_POST_FAILURE';
 
 export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST';
 export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
@@ -173,17 +182,23 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.likePostError = action.error;
       break;
     case LOAD_POST_REQUEST:
+    case LOAD_HASHTAG_POST_REQUEST:
+    case LOAD_USER_POST_REQUEST:
       draft.addPostLoading = true;
       draft.addPostDone = false;
       draft.addPostError = null;
       break;
     case LOAD_POST_SUCCESS:
+    case LOAD_HASHTAG_POST_SUCCESS:
+    case LOAD_USER_POST_SUCCESS:
       draft.addPostLoading = false;
       draft.addPostDone = true;
       draft.mainPosts = draft.mainPosts.concat(action.data);
       draft.hasMorePosts = action.data.length === 10;
       break;
     case LOAD_POST_FAILURE:
+    case LOAD_HASHTAG_POST_FAILURE:
+    case LOAD_USER_POST_FAILURE:
       draft.addPostLoading = false;
       draft.addPostError = action.error;
       break;

@@ -6,8 +6,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
-import { LOAD_USER_POSTS_REQUEST } from '../../reducers/post';
-import { LOAD_MY_INFO_REQUEST, LOAD_USER_REQUEST } from '../../reducers/user';
+import { LOAD_USER_POST_REQUEST } from '../../reducer/post';
+import { LOAD_MY_INFO_REQUEST, LOAD_USER_REQUEST } from '../../reducer/user';
 import PostCard from '../../components/PostCard';
 import wrapper from '../../store/configureStore';
 import AppLayout from '../../components/AppLayout';
@@ -24,7 +24,7 @@ const User = function () {
       if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
         if (hasMorePosts && !loadUserPostsLoading) {
           dispatch({
-            type: LOAD_USER_POSTS_REQUEST,
+            type: LOAD_USER_POST_REQUEST,
             lastId: mainPosts[mainPosts.length - 1] && mainPosts[mainPosts.length - 1].id,
             data: id,
           });
@@ -92,7 +92,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     axios.defaults.headers.Cookie = cookie;
   }
   context.store.dispatch({
-    type: LOAD_USER_POSTS_REQUEST,
+    type: LOAD_USER_POST_REQUEST,
     data: context.params.id,
   });
   context.store.dispatch({

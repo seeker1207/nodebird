@@ -55,7 +55,7 @@ function lodeUserAPI(data) {
 function* loadUser(action) {
   try {
     const result = yield call(lodeUserAPI, action.data);
-
+    console.log(`loadUser 결과값!! ${result.data}`);
     yield put({
       type: LOAD_USER_SUCCESS,
       data: result.data,
