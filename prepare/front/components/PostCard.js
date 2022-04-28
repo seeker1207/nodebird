@@ -4,12 +4,15 @@ import { EllipsisOutlined, HeartOutlined, MessageOutlined, RetweetOutlined, Hear
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import moment from 'moment';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import { LIKE_POST_REQUEST, REMOVE_POST_REQUEST, RETWEET_REQUEST, UNLIKE_POST_REQUEST } from '../reducer/post';
 import FollowButton from './FollowButton';
+import 'moment/locale/ko';
 
+moment.locale();
 const PostCard = function ({ post }) {
   const dispatch = useDispatch();
   const { removePostLoading, retweetError } = useSelector((state) => state.post);
@@ -94,6 +97,7 @@ const PostCard = function ({ post }) {
             <Card
               cover={post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}
             >
+              <div style={{ float: 'right' }}>{moment(post.createdAt).fromNow()}</div>
               <Card.Meta
                 avatar={(
                   <Link href={`/user/${post.Retweet.User.id}`}>
@@ -106,15 +110,18 @@ const PostCard = function ({ post }) {
             </Card>
           )
           : (
-            <Card.Meta
-              avatar={(
-                <Link href={`/user/${post.User.id}`}>
-                  <a><Avatar>{post.User.nickname[0]}</Avatar></a>
-                </Link>
+            <>
+              <div style={{ float: 'right' }}>{moment(post.createdAt).fromNow()}</div>
+              <Card.Meta
+                avatar={(
+                  <Link href={`/user/${post.User.id}`}>
+                    <a><Avatar>{post.User.nickname[0]}</Avatar></a>
+                  </Link>
               )}
-              title={post.User.nickname}
-              description={<PostCardContent postData={post.content} />}
-            />
+                title={post.User.nickname}
+                description={<PostCardContent postData={post.content} />}
+              />
+            </>
           )}
       </Card>
       {commentFormOpened && (
@@ -148,7 +155,7 @@ PostCard.propTypes = {
     id: PropTypes.number,
     User: PropTypes.object,
     content: PropTypes.string,
-    createAt: PropTypes.object,
+    createdAt: PropTypes.object,
     Comments: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
     Likers: PropTypes.arrayOf(PropTypes.object),
